@@ -27,7 +27,21 @@ def print_maps():
     print(maps[6], end=" ")
     print(maps[7], end=" ")
     print(maps[8])
-# Сделать ход в ячейку
+# функция проверки на число
+def input_digit():
+    a = input()
+    while not a.isdigit():
+        print("Вы ввели не число, попробуйте снова")
+        a = input()
+    return int(a)
+#функция диапазона
+def input_cell_number():
+    a = input_digit()
+    while a < 0 or a > 8:
+        print("Вы ввели число вне диапазона, попробуйте снова")
+        a = input_digit()
+    return a
+#функция внесения символа в maps по индексу
 def step_maps(step,symbol):
     ind = maps.index(step)
     maps[ind] = symbol
@@ -44,39 +58,27 @@ def get_result():
          win = "Игра завершена,победил O"
 
    return win
-
+#Ход крестика,функция
 def hod_x():
    print("Ходит крестик")
    print("Введите номер клетки:")
-   a = int(input())
-   while a < 0 or a > 8:
-      print("Вы ввели число вне диапазона, попробуйте снова")
-      a = int(input())
+   a = input_cell_number()
    while maps[a] == "X" or maps[a] == "O":
-      print("Клетка занята, введите другое число:")
-      a = int(input())
-      while a < 0 or a > 8:
-         print("Вы ввели число вне диапазона, попробуйте снова")
-         a = int(input())
+       print("Клетка занята, введите другое число:")
+       a = input_cell_number()
    step_maps(a,"X")
+#ход нолика, функция
 def hod_O():
    print("Ходит нолик")
    print("Введите номер клетки:")
-   a = int(input())
-   while a < 0 or a > 8:
-      print("Вы ввели число вне диапазона, попробуйте снова")
-      a = int(input())
+   a = input_cell_number()
    while maps[a] == "X" or maps[a] == "O":
-      print("Клетка занята, введите другое число:")
-      a = int(input())
-      while a < 0 or a > 8:
-         print("Вы ввели число вне диапазона, попробуйте снова")
-         a = int(input())
+       print("Клетка занята, введите другое число:")
+       a = input_cell_number()
    step_maps(a, "O")
 
 # Основная программа
 sum_iter_o=0
-
 while sum_iter_o != 5:  #Так как крестик ходит первый, ноликов не может быть больше 4
     print_maps()
     hod_x()
